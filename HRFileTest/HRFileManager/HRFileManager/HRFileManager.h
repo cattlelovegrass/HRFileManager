@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface HRFileManager : NSObject
 
@@ -96,4 +97,15 @@
  */
 +(void)renameFileWithName:(NSString *)fileName atPath:(NSString *)path;
 
+/**
+ *  @author Henry
+ *
+ *  获取框架内bundle包的资源图片
+ *
+ *  @param imageName 图片名
+ *
+ *  @return 图片对象
+ *
+ */
++(UIImage *)getMyBundleImageWithName:(NSString *)imageName;
 @end

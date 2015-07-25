@@ -9,9 +9,12 @@
 #import "HRFileListVC.h"
 #import "HRFileItemCell.h"
 #import "HRFileManager.h"
+#import "HRSelectPathVC.h"
 
-@interface HRFileListVC ()<UITableViewDataSource,UITableViewDelegate>{
+@interface HRFileListVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate,HRSelectPathDelegate>{
     NSMutableArray *files;
+    HRFileItem  *currentItem;
+    BOOL copyOrCut;
 }
 @property(nonatomic,strong)UITableView *fileList;
 @end
@@ -47,8 +50,15 @@
     [self getFileListAndShow];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getFileListAndShow];
+}
+
 -(void)getFileListAndShow{
-    files = [HRFileManager getAllItemsListUnderPath:_currentPath].mutableCopy;
+    [files removeAllObjects];
+    [files addObjectsFromArray:[HRFileManager getAllItemsListUnderPath:_currentPath]];
+
     [_fileList reloadData];
 }
 
@@ -96,7 +106,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 80;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -110,6 +120,120 @@
         HRFileListVC *newVC = [[clazz alloc] initWithFilePath:item.filePath];
         [self.navigationController pushViewController:newVC animated:YES];
     }
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    currentItem = [files objectAtIndex:indexPath.row];
+    UIActionSheet *menuSheet = [[UIActionSheet alloc] initWithTitle:currentItem.fileName delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制",@"移动",@"删除",@"重命名", nil];
+    [menuSheet showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex) {
+        case 0:{
+            DLog(@"复制");
+            copyOrCut = YES;
+            HRSelectPathVC  *pathVC = [[HRSelectPathVC alloc] initWithSelectType:HRSelectFilePathOnly andPath:nil];
+            pathVC.delegate = self;
+            if(currentItem.fileType == HRFileTypeFolder){
+                pathVC.excludePath = currentItem.filePath;
+            }
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:pathVC];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
+        }
+            break;
+        case 1:{
+            DLog(@"移动");
+            copyOrCut = NO;
+            HRSelectPathVC  *pathVC = [[HRSelectPathVC alloc] initWithSelectType:HRSelectFilePathOnly andPath:nil];
+            pathVC.delegate = self;
+            if(currentItem.fileType == HRFileTypeFolder){
+                pathVC.excludePath = currentItem.filePath;
+            }
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:pathVC];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
+        }
+            break;
+        case 2:{
+            DLog(@"删除");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定删除" message:@"文件删除后无法恢复，是否确认删除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            [alert show];
+        }
+            break;
+        case 3:{
+            DLog(@"重命名");
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"重命名" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [[alert textFieldAtIndex:0] setText:[currentItem.fileName stringByDeletingPathExtension]];
+            [alert show];
+        }
+            break;
+        default:{
+            DLog(@"取消");
+            currentItem = nil;
+        }
+            break;
+    }
+}
+
+//删除和重命名的功能
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if(alertView.alertViewStyle == UIAlertViewStylePlainTextInput){
+        switch (buttonIndex) {
+            case 0:{
+                DLog(@"modify canceled");
+            }
+                break;
+            case 1:{
+                NSString *name = [alertView textFieldAtIndex:0].text;
+                if([name isEqualToString:currentItem.fileName]){
+                    DLog(@"Name not modified");
+                }else{
+                    [HRFileManager renameFileWithName:[name stringByAppendingString:[self getFileFormatWithName:currentItem.fileName]] atPath:currentItem.filePath];
+                    [self getFileListAndShow];
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }else{
+        switch (buttonIndex) {
+            case 0:{
+                currentItem = nil;
+            }
+                break;
+            case 1:{
+                [HRFileManager deleteFileAtPath:currentItem.filePath];
+                currentItem = nil;
+                [self getFileListAndShow];
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+-(void)didSelectFilePath:(NSString *)path{
+    NSString *destinationPath = [path stringByAppendingPathComponent:[currentItem.filePath lastPathComponent]];
+    if(copyOrCut){
+        [HRFileManager copyItemFromPath:currentItem.filePath toDestinatonPath:destinationPath];
+    }else{
+        [HRFileManager moveFileFromPath:currentItem.filePath ToDestinationPath:destinationPath];
+    }
+    
+    currentItem = nil;
+    [self getFileListAndShow];
+}
+
+//获取后缀名
+-(NSString *)getFileFormatWithName:(NSString *)fileName{
+    NSArray *tmpArray = [fileName componentsSeparatedByString:@"."];
+    
+    return [tmpArray lastObject];
 }
 
 @end

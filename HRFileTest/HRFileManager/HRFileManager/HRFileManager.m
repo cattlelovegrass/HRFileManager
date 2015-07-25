@@ -8,6 +8,7 @@
 
 #import "HRFileManager.h"
 #import "HRFileItem.h"
+#import <UIKit/UIKit.h>
 
 @implementation HRFileManager
 
@@ -120,7 +121,7 @@
         //只加入非目录情况
         if([[self fileManager] fileExistsAtPath:item.filePath isDirectory:&isDirectory]){
             if(isDirectory){
-                item.fileType = HRFileTypeFile;
+                item.fileType = HRFileTypeFolder;
                 [folderList addObject:item];
             }
         }
@@ -129,12 +130,18 @@
     return folderList;
 }
 
+//暂时不实现搜索功能
 +(NSArray *)searchForItemWithName:(NSString *)keyString AtPath:(NSString *)path{
     NSMutableArray *results = [NSMutableArray new];
     
     
-    
     return results;
+}
+
++(UIImage *)getMyBundleImageWithName:(NSString *)imageName{
+    NSString *imageString = [NSString stringWithFormat:@"HRFileManagerResource.bundle/%@",imageName];
+    
+    return [UIImage imageNamed:imageString];
 }
 
 @end

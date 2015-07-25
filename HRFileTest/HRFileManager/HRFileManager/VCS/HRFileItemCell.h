@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "HRFileItem.h"
 
-#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-
 @interface HRFileItemCell : UITableViewCell
 
 @property(nonatomic,strong)HRFileItem *fileItem;

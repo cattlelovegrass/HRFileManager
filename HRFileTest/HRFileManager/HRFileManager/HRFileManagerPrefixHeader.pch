@@ -1,0 +1,27 @@
+//
+//  HRFileManagerPrefixHeader.pch
+//  HRFileManager
+//
+//  Created by ZhangHeng on 15/7/25.
+//  Copyright (c) 2015年 ZhangHeng. All rights reserved.
+//
+
+#ifndef HRFileManager_HRFileManagerPrefixHeader_pch
+#define HRFileManager_HRFileManagerPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+#define DOCUMENT_PATH [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
+
+#ifdef DEBUG
+//#if (1)
+#define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#define DLog(...)
+#endif
+
+#endif

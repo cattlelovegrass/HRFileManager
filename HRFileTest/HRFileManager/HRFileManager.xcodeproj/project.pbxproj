@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		7E1093751B635B1700175B79 /* HRFileManagerBuilder */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 7E1093761B635B1700175B79 /* Build configuration list for PBXAggregateTarget "HRFileManagerBuilder" */;
-			buildPhases = (
-				7E1093871B635D9400175B79 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = HRFileManagerBuilder;
-			productName = HRFileManagerBuilder;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		7E10936F1B635AA700175B79 /* HRFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E10936C1B635AA700175B79 /* HRFileManager.m */; };
 		7E1093701B635AA700175B79 /* HRFileItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E10936E1B635AA700175B79 /* HRFileItem.m */; };
@@ -31,6 +17,11 @@
 		7E1093861B635C6F00175B79 /* HRFileListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1093831B635C6F00175B79 /* HRFileListVC.m */; };
 		7E10938F1B63620E00175B79 /* HRFileItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E10938C1B63620E00175B79 /* HRFileItemCell.h */; };
 		7E1093901B63620E00175B79 /* HRFileItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E10938D1B63620E00175B79 /* HRFileItemCell.m */; };
+		7E1093F21B6371A500175B79 /* File@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E1093F01B6371A500175B79 /* File@2x.png */; };
+		7E1093F31B6371A500175B79 /* Folder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E1093F11B6371A500175B79 /* Folder@2x.png */; };
+		7E1093FB1B6399E100175B79 /* HRFileManagerPrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 7E1093FA1B6399E100175B79 /* HRFileManagerPrefixHeader.pch */; };
+		7E1093FF1B63A01F00175B79 /* HRSelectPathVC.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E1093FD1B63A01F00175B79 /* HRSelectPathVC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E1094001B63A01F00175B79 /* HRSelectPathVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1093FE1B63A01F00175B79 /* HRSelectPathVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +48,13 @@
 		7E1093831B635C6F00175B79 /* HRFileListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRFileListVC.m; sourceTree = "<group>"; };
 		7E10938C1B63620E00175B79 /* HRFileItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRFileItemCell.h; sourceTree = "<group>"; };
 		7E10938D1B63620E00175B79 /* HRFileItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRFileItemCell.m; sourceTree = "<group>"; };
+		7E1093E91B63718B00175B79 /* HRFileManagerResource.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HRFileManagerResource.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E1093EC1B63718B00175B79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E1093F01B6371A500175B79 /* File@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "File@2x.png"; path = "VCS/File@2x.png"; sourceTree = "<group>"; };
+		7E1093F11B6371A500175B79 /* Folder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Folder@2x.png"; path = "VCS/Folder@2x.png"; sourceTree = "<group>"; };
+		7E1093FA1B6399E100175B79 /* HRFileManagerPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRFileManagerPrefixHeader.pch; sourceTree = "<group>"; };
+		7E1093FD1B63A01F00175B79 /* HRSelectPathVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRSelectPathVC.h; sourceTree = "<group>"; };
+		7E1093FE1B63A01F00175B79 /* HRSelectPathVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRSelectPathVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +67,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7E1093E61B63718B00175B79 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +83,7 @@
 				7E10937C1B635B4D00175B79 /* Foundation.framework */,
 				7E10937A1B635B3A00175B79 /* UIKit.framework */,
 				7E1093531B635A8800175B79 /* HRFileManager */,
+				7E1093EA1B63718B00175B79 /* HRFileManagerResource */,
 				7E1093521B635A8800175B79 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				7E1093511B635A8800175B79 /* libHRFileManager.a */,
+				7E1093E91B63718B00175B79 /* HRFileManagerResource.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,11 +100,13 @@
 		7E1093531B635A8800175B79 /* HRFileManager */ = {
 			isa = PBXGroup;
 			children = (
+				7E1093FC1B639A7000175B79 /* Images */,
 				7E1093811B635C4D00175B79 /* VCS */,
 				7E10936B1B635AA700175B79 /* HRFileManager.h */,
 				7E10936C1B635AA700175B79 /* HRFileManager.m */,
 				7E10936D1B635AA700175B79 /* HRFileItem.h */,
 				7E10936E1B635AA700175B79 /* HRFileItem.m */,
+				7E1093FA1B6399E100175B79 /* HRFileManagerPrefixHeader.pch */,
 			);
 			path = HRFileManager;
 			sourceTree = "<group>";
@@ -109,8 +118,35 @@
 				7E1093831B635C6F00175B79 /* HRFileListVC.m */,
 				7E10938C1B63620E00175B79 /* HRFileItemCell.h */,
 				7E10938D1B63620E00175B79 /* HRFileItemCell.m */,
+				7E1093FD1B63A01F00175B79 /* HRSelectPathVC.h */,
+				7E1093FE1B63A01F00175B79 /* HRSelectPathVC.m */,
 			);
 			path = VCS;
+			sourceTree = "<group>";
+		};
+		7E1093EA1B63718B00175B79 /* HRFileManagerResource */ = {
+			isa = PBXGroup;
+			children = (
+				7E1093EB1B63718B00175B79 /* Supporting Files */,
+			);
+			path = HRFileManagerResource;
+			sourceTree = "<group>";
+		};
+		7E1093EB1B63718B00175B79 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7E1093EC1B63718B00175B79 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7E1093FC1B639A7000175B79 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7E1093F01B6371A500175B79 /* File@2x.png */,
+				7E1093F11B6371A500175B79 /* Folder@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,8 +157,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E10937F1B635C1900175B79 /* HRFileManager.h in Headers */,
+				7E1093FB1B6399E100175B79 /* HRFileManagerPrefixHeader.pch in Headers */,
 				7E1093801B635C1900175B79 /* HRFileItem.h in Headers */,
 				7E1093851B635C6F00175B79 /* HRFileListVC.h in Headers */,
+				7E1093FF1B63A01F00175B79 /* HRSelectPathVC.h in Headers */,
 				7E10938F1B63620E00175B79 /* HRFileItemCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -148,6 +186,23 @@
 			productReference = 7E1093511B635A8800175B79 /* libHRFileManager.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		7E1093E81B63718B00175B79 /* HRFileManagerResource */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E1093EF1B63718B00175B79 /* Build configuration list for PBXNativeTarget "HRFileManagerResource" */;
+			buildPhases = (
+				7E1093E51B63718B00175B79 /* Sources */,
+				7E1093E61B63718B00175B79 /* Frameworks */,
+				7E1093E71B63718B00175B79 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HRFileManagerResource;
+			productName = HRFileManagerResource;
+			productReference = 7E1093E91B63718B00175B79 /* HRFileManagerResource.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,7 +215,7 @@
 					7E1093501B635A8800175B79 = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					7E1093751B635B1700175B79 = {
+					7E1093E81B63718B00175B79 = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
@@ -178,26 +233,22 @@
 			projectRoot = "";
 			targets = (
 				7E1093501B635A8800175B79 /* HRFileManager */,
-				7E1093751B635B1700175B79 /* HRFileManagerBuilder */,
+				7E1093E81B63718B00175B79 /* HRFileManagerResource */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		7E1093871B635D9400175B79 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		7E1093E71B63718B00175B79 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
+				7E1093F31B6371A500175B79 /* Folder@2x.png in Resources */,
+				7E1093F21B6371A500175B79 /* File@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport FRAMEWORK_LOCN=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\n\n# Create the path to the real Headers die\nmkdir -p \"${FRAMEWORK_LOCN}/Versions/A/Headers\"\n\n# Create the required symlinks\n/bin/ln -sfh A \"${FRAMEWORK_LOCN}/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${FRAMEWORK_LOCN}/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \\\n\"${FRAMEWORK_LOCN}/${PRODUCT_NAME}\"\n\n# Copy the public headers into the framework\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \\\n\"${FRAMEWORK_LOCN}/Versions/A/Headers\"";
 		};
-/* End PBXShellScriptBuildPhase section */
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7E10934D1B635A8800175B79 /* Sources */ = {
@@ -208,6 +259,14 @@
 				7E1093861B635C6F00175B79 /* HRFileListVC.m in Sources */,
 				7E1093701B635AA700175B79 /* HRFileItem.m in Sources */,
 				7E10936F1B635AA700175B79 /* HRFileManager.m in Sources */,
+				7E1094001B63A01F00175B79 /* HRSelectPathVC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E1093E51B63718B00175B79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +354,8 @@
 		7E1093661B635A8800175B79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HRFileManager/HRFileManagerPrefixHeader.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
@@ -305,6 +366,8 @@
 		7E1093671B635A8800175B79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/HRFileManager/HRFileManagerPrefixHeader.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
@@ -312,17 +375,36 @@
 			};
 			name = Release;
 		};
-		7E1093771B635B1700175B79 /* Debug */ = {
+		7E1093ED1B63718B00175B79 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = HRFileManagerResource/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos8.4;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
-		7E1093781B635B1700175B79 /* Release */ = {
+		7E1093EE1B63718B00175B79 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = HRFileManagerResource/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos8.4;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -347,14 +429,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7E1093761B635B1700175B79 /* Build configuration list for PBXAggregateTarget "HRFileManagerBuilder" */ = {
+		7E1093EF1B63718B00175B79 /* Build configuration list for PBXNativeTarget "HRFileManagerResource" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7E1093771B635B1700175B79 /* Debug */,
-				7E1093781B635B1700175B79 /* Release */,
+				7E1093ED1B63718B00175B79 /* Debug */,
+				7E1093EE1B63718B00175B79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

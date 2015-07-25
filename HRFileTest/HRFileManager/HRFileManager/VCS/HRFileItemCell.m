@@ -7,6 +7,7 @@
 //
 
 #import "HRFileItemCell.h"
+#import "HRFileManager.h"
 
 @interface HRFileItemCell()
 
@@ -30,11 +31,12 @@
 }
 
 -(void)configCell{
-    _fileTypeImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
+    self.accessoryType = UITableViewCellAccessoryDetailButton;
+    _fileTypeImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 60, 60)];
     [self.contentView addSubview:_fileTypeImage];
     
-    _fileNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 20, SCREEN_WIDTH - 120, 20)];
-    _fileSizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 50, SCREEN_WIDTH - 120, 20)];
+    _fileNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 10, SCREEN_WIDTH - 120, 20)];
+    _fileSizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 40, SCREEN_WIDTH - 120, 20)];
     
     [self.contentView addSubview:_fileNameLabel];
     [self.contentView addSubview:_fileSizeLabel];
@@ -48,10 +50,11 @@
 
 -(void)setFileItem:(HRFileItem *)fileItem{
     _fileItem = fileItem;
-    if(fileItem.fileType == HRFileTypeFile)
-        _fileTypeImage.image = [UIImage imageNamed:@"File"];
-    else
-        _fileTypeImage.image = [UIImage imageNamed:@"Folder"];
+    if(fileItem.fileType == HRFileTypeFile){
+        _fileTypeImage.image = [HRFileManager getMyBundleImageWithName:@"File"];
+    }else{
+        _fileTypeImage.image = [HRFileManager getMyBundleImageWithName:@"Folder"];
+    }
     _fileNameLabel.text = fileItem.fileName;
     _fileSizeLabel.text = fileItem.fileSize;
 }
