@@ -26,6 +26,13 @@
     [[self fileManager] removeItemAtPath:path error:nil];
 }
 
++(void)createNewFolder:(NSString *)folderName atPath:(NSString *)path{
+    if(!path || !folderName)
+        return;
+    NSString *destinationPath = [path stringByAppendingPathComponent:folderName];
+    [[self fileManager] createDirectoryAtPath:destinationPath withIntermediateDirectories:YES attributes:nil error:nil];
+}
+
 +(void)renameFileWithName:(NSString *)fileName atPath:(NSString *)path{
     if(!path)
         return;

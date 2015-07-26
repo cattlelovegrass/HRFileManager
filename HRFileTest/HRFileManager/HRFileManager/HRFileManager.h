@@ -14,6 +14,16 @@
 /**
  *  @author Henry
  *
+ *  新建文件夹
+ *
+ *  @param folderName 文件夹名
+ *  @param path       路径名
+ */
++(void)createNewFolder:(NSString *)folderName atPath:(NSString *)path;
+
+/**
+ *  @author Henry
+ *
  *  移动文件到指定路径
  *
  *  @param fromPath        原始文件路径

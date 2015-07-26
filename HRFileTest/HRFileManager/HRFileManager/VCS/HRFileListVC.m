@@ -11,11 +11,12 @@
 #import "HRFileManager.h"
 #import "HRSelectPathVC.h"
 
-@interface HRFileListVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate,HRSelectPathDelegate>{
+@interface HRFileListVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIAlertViewDelegate,HRSelectPathDelegate,UIDocumentInteractionControllerDelegate>{
     NSMutableArray *files;
     HRFileItem  *currentItem;
     BOOL copyOrCut;
 }
+@property(nonatomic,strong)UIDocumentInteractionController *document;
 @property(nonatomic,strong)UITableView *fileList;
 @end
 
@@ -25,6 +26,8 @@
     self = [super init];
     if(self){
         self.currentPath = filePath;
+        if(!self.currentPath)
+            self.currentPath = DOCUMENT_PATH;
     }
     return self;
 }
@@ -46,6 +49,8 @@
     _fileList.delegate = self;
     _fileList.dataSource = self;
     [_fileList registerClass:[HRFileItemCell class] forCellReuseIdentifier:@"fileItem"];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"新建文件夹" style:UIBarButtonItemStylePlain target:self action:@selector(createNewFolder)];
     
     [self getFileListAndShow];
 }
@@ -113,8 +118,15 @@
     HRFileItem *item = [files objectAtIndex:indexPath.row];
     
     if(item.fileType == HRFileTypeFile){
-        if(_delegate && [_delegate respondsToSelector:@selector(didselectFilePath:)])
-            [_delegate didselectFilePath:item.filePath];
+//        if(_delegate && [_delegate respondsToSelector:@selector(didselectFilePath:)])
+//            [_delegate didselectFilePath:item.filePath];
+        NSURL *URL = [NSURL fileURLWithPath:item.filePath];
+        
+        if (URL) {
+            self.document = [UIDocumentInteractionController interactionControllerWithURL:URL];
+            [self.document setDelegate:self];
+            [self.document presentPreviewAnimated:YES];
+        }
     }else{
         Class clazz = NSClassFromString(NSStringFromClass([self class]));
         HRFileListVC *newVC = [[clazz alloc] initWithFilePath:item.filePath];
@@ -186,10 +198,20 @@
                 break;
             case 1:{
                 NSString *name = [alertView textFieldAtIndex:0].text;
-                if([name isEqualToString:currentItem.fileName]){
-                    DLog(@"Name not modified");
+                if(name.length == 0){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"不能为空" message:@"名字不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                    [alert show];
+                }
+                
+                if(currentItem){
+                    if([name isEqualToString:currentItem.fileName]){
+                        DLog(@"Name not modified");
+                    }else{
+                        [HRFileManager renameFileWithName:[name stringByAppendingString:[self getFileFormatWithName:currentItem.fileName]] atPath:currentItem.filePath];
+                        [self getFileListAndShow];
+                    }
                 }else{
-                    [HRFileManager renameFileWithName:[name stringByAppendingString:[self getFileFormatWithName:currentItem.fileName]] atPath:currentItem.filePath];
+                    [HRFileManager createNewFolder:name atPath:_currentPath];
                     [self getFileListAndShow];
                 }
             }
@@ -217,6 +239,14 @@
     }
 }
 
+-(void)createNewFolder{
+    currentItem = nil;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"重命名" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [[alert textFieldAtIndex:0] setText:[currentItem.fileName stringByDeletingPathExtension]];
+    [alert show];
+}
+
 -(void)didSelectFilePath:(NSString *)path{
     NSString *destinationPath = [path stringByAppendingPathComponent:[currentItem.filePath lastPathComponent]];
     if(copyOrCut){
@@ -227,6 +257,10 @@
     
     currentItem = nil;
     [self getFileListAndShow];
+}
+
+- (UIViewController *) documentInteractionControllerViewControllerForPreview: (UIDocumentInteractionController *) controller {
+    return self;
 }
 
 //获取后缀名
